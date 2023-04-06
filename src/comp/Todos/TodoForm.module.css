@@ -1,0 +1,72 @@
+
+
+.todoFormContainer form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.todoFormContainer input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    font-size: 1.5rem;
+    transform: scale(1);
+    box-shadow: #282c34 10px 10px 10px 2px;
+
+}
+
+.todoFormContainer input:hover {
+    border-color: #333;
+    transform: scale(1.05);
+}
+
+.todoFormContainer button {
+    margin-left: 2rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transform: scale(1);
+    box-shadow: #282c34 10px 10px 10px 2px;
+
+
+    color: rgba(255,255,255,0.9);
+    border-radius: 20px;
+    background: linear-gradient(-45deg, #ffa63d, #ff3d77, #338aff, #3cf0c5);
+    background-size: 600%;
+    -webkit-animation: anime 16s linear infinite;
+    animation: anime 16s linear infinite;
+}
+
+.todoFormContainer button:hover {
+    transform: scale(1.05);
+}
+
+@-webkit-keyframes anime {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+@keyframes anime {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

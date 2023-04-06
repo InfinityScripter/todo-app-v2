@@ -1,0 +1,79 @@
+.btnRes {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    border: 2px solid rgb(45, 75, 63);
+    background-color: #fff;
+    cursor: pointer;
+    box-shadow: 0 0 10px #333;
+    overflow: hidden;
+    transition: .3s;
+    margin: 10px;
+}
+.btnRes:hover {
+    background-color: rgb(245, 207, 207);
+    transform: scale(1.2);
+    box-shadow: 0 0 4px #111;
+    transition: .3s;
+}
+
+/* Удалите этот блок
+.btnDel:focus svg {
+    opacity: 0;
+    transition: .3s;
+}
+*/
+
+/* Замените :focus на :hover */
+.btnRes:hover svg {
+    opacity: 0;
+    transition: .3s;
+}
+
+/* Удалите этот блок
+.btnDel:focus {
+    width: 150px;
+    height: 50px;
+    transition: .3s;
+}
+*/
+
+/* Замените :focus на :hover */
+.btnRes:hover {
+    width: 150px;
+    height: 50px;
+    transition: .3s;
+}
+
+/* Удалите этот блок
+.btnDel:focus .spanDel {
+    opacity: 1;
+    transition: .3s;
+}
+*/
+
+/* Замените :focus на :hover */
+.btnRes:hover .spanDel {
+    opacity: 1;
+    transition: .3s;
+}
+
+.spanDel {
+    width: 150px;
+    position: absolute;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    color: rgb(45, 75, 63);
+    font-weight: 300;
+    transition: .3s;
+}
+
+.svgRes {
+    color: rgb(45, 75, 63);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: .3s;
+}
