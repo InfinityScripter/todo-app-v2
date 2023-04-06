@@ -41,24 +41,28 @@ function App() {
   const deleteHandler = () => {
     const updateTodos = todos.filter ((todo) => !todo.isCompleted);
     setTodos (updateTodos);
+
   };
 
   const resetTodosHandler = () => {
    setTodos([])
   }
 
+  const countCompleted = todos.filter ((todo) => todo.isCompleted).length;
+  console.log (countCompleted)
 
   return (
     <div className="App">
-      <h1 className='animate__animated animate__flipInY animate__delay-1s'>TODO APP</h1>
+      <h1 className='animate__animated animate__flipInY animate__delay-1s animate__slow'>TODO APP</h1>
       <TodoForm addTodo={addTodoHandler}/>
-<TodosActions deleteHandler={deleteHandler} resetTodo={resetTodosHandler}/>
+      {todos.length > 0 && <TodosActions deleteHandler={deleteHandler} resetTodo={resetTodosHandler}/>}
       {!todos.length && <p>todo is empty</p>}
       <Todolist
         todos={todos}
         doubleClick={doubleClickHandler}
         addStatus={isAdd}
         complete={completeHandler}/>
+      {countCompleted > 0 && <p className='animate__animated animate__bounceInUp animate__delay-1s animate__fast'>You have completed {countCompleted} todos</p>}
     </div>
 
   );

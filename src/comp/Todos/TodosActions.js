@@ -6,8 +6,8 @@ import styles from './TodosActions.module.css';
 const TodosActions = ({deleteHandler,resetTodo}) => {
   return (
     <div className={styles.actions}>
-      <Delete deletTodo={deleteHandler}/>
     <Reset resetTodo={resetTodo}/>
+      <Delete deletTodo={deleteHandler}/>
     </div>
   );
 };
