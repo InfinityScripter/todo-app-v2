@@ -1,0 +1,17 @@
+motor
+PyJWT
+bcrypt
+uvicorn
+python-decouple
+fastapi
+pydantic[email]
+passlib
+pytest
+requests
+python-multipart
+httpx
+pytest-asyncio
+Jinja2
+trio
+authlib
+itsdangerous

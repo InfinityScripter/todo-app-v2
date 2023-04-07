@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  static:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: todo
+    image: todo:latest
+    ports:
+      - "3800:3000"
+    volumes:
+      - ./src:/src
