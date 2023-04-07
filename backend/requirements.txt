@@ -15,3 +15,7 @@ Jinja2
 trio
 authlib
 itsdangerous
+sqlalchemy
+databases
+asyncpg
+psycopg2
