@@ -1,39 +1,32 @@
-from typing import List, Optional
+from sqlalchemy.ext.asyncio import create_async_engine
+from sqlalchemy.ext.asyncio import async_sessionmaker
+from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy import Integer, String, Column, Boolean
 
-import databases
-import sqlalchemy
-from pydantic import BaseModel
+DATABASE_URL = "postgresql+asyncpg://user:password@db/todo"
+engine = create_async_engine(DATABASE_URL, echo=True)
 
-DATABASE_URL = "postgresql://user:password@db/todo"
-
-database = databases.Database(DATABASE_URL)
-
-metadata = sqlalchemy.MetaData()
-
-notes = sqlalchemy.Table(
-    "notes",
-    metadata,
-    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
-    sqlalchemy.Column("text", sqlalchemy.String),
-    sqlalchemy.Column("completed", sqlalchemy.Boolean),
-)
+class Base(DeclarativeBase):
+    pass
 
 
-engine = sqlalchemy.create_engine(
-    DATABASE_URL
-)
-metadata.create_all(engine)
+class Todo(Base):
+    __tablename__ = "todos"
+
+    id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
+    title = Column(String)
+    completed = Column(Boolean)
+
+    def __repr__(self):
+     return "<Todo(title='%s', completed='%s'>" % (
+         self.title,
+         self.completed,
+     )
 
 
-class NoteIn(BaseModel):
-    text: str
-    completed: bool
+async_session = async_sessionmaker(engine, expire_on_commit=False)
 
-
-class Note(BaseModel):
-    id: Optional[int]
-    text: str
-    completed: bool
-
-
+async def create_all():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
 
