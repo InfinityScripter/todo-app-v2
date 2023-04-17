@@ -39,15 +39,16 @@ async def get_todos():
         query = select(Todo).order_by(Todo.id)
         query_result = await session.execute(query)
         todos = query_result.scalars().all()
+        print(todos)
         await session.commit()
 
     return todos
 
 
 @app.get("/api/todos/{todo_id}")
-async def get_todo(todo_id):
+async def get_todo(todo_id: int):
     async with async_session() as session:
-        todo = await session.get(Todo, todo_id)
+        todo = await session.get(Todo, int(todo_id))
         if todo is None:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
@@ -64,7 +65,6 @@ async def create_todo(todo: TodoInModel):
         new_todo = Todo(**todo.dict())
         session.add(new_todo)
         await session.commit()
-
     return new_todo
 
 
@@ -80,7 +80,6 @@ async def update_todo(raw_todo: TodoModel):
         todo = Todo(**raw_todo.dict())
         await session.execute(update(Todo).filter(Todo.id == raw_todo.id).values(**raw_todo.dict()))
         await session.commit()
-
     return todo
 
 
