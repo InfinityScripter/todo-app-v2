@@ -12,7 +12,7 @@ const Todo = ({todo, doubleClick, addStatus, complete}) => {
     return (
       <>
         <div className={style}>
-          <div className={styles.todoText}>📄 {todo.text} </div>
+          <div className={styles.todoText}>📄 {todo.title} </div>
           <BtnTodoComplete onClick={complete}/>
           <BtnTodoDel onClick={doubleClick}/>
         </div>

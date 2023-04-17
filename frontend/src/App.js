@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {v4 as uuidv4} from 'uuid';
-
+import {useState} from 'react';
+import axios from 'axios';
 import './App.css';
 import TodoForm from './comp/Todos/TodoForm'
 import Todolist from './comp/Todos/Todolist';
@@ -13,7 +14,20 @@ function App() {
   const [todos, setTodos] = React.useState ([]);
   const [isAdd, setIsAdd] = React.useState (false);
   const [isCompleted, setIsCompleted] = React.useState (false);
+  const [data, setData] = useState(null);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api/todos');
+        setTodos(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const addTodoHandler = (text) => {
     const newTodo = {
