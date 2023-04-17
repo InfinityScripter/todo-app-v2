@@ -58,6 +58,7 @@ const Todo = ({ todo, doubleClick, addStatus, complete, startEditing, editTodo }
               onKeyDown={handleKeyPress}
               className={styles.todoText}
             />
+
           ) : (
             <div className={styles.todoText}>📄 {todo.title}</div>
           )}
