@@ -68,25 +68,19 @@ async def create_todo(todo: TodoInModel):
     return new_todo
 
 
-@app.put("/api/todos/{todo_id}")
-async def update_todo(todo_id: int, raw_todo: TodoInModel):
+@app.put("/api/todos/")
+async def update_todo(raw_todo: TodoModel):
     async with async_session() as session:
-        todo = await session.get(Todo, todo_id)
+        todo = await session.get(Todo, raw_todo.id)
         if todo is None:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
-                detail=f"Todo {todo_id} don't exists",
+                detail=f"Todo {raw_todo.id} don't exists",
             )
-
-#   todo = Todo(**raw_todo.dict())
-#   await session.execute(update(Todo).filter(Todo.id == raw_todo.id).values(**raw_todo.dict()))
-
-
-        for key, value in raw_todo.dict().items():
-            setattr(todo, key, value)
+        todo = Todo(**raw_todo.dict())
+        await session.execute(update(Todo).filter(Todo.id == raw_todo.id).values(**raw_todo.dict()))
         await session.commit()
     return todo
-
 
 
 @app.delete("/api/todos/{todo_id}")
@@ -102,4 +96,3 @@ async def delete_todo(todo_id: int):
         await session.commit()
 
     return {'message': f'Todo with id={todo_id} was deleted.'}
-
