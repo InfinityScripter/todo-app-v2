@@ -77,6 +77,11 @@ async def update_todo(todo_id: int, raw_todo: TodoInModel):
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"Todo {todo_id} don't exists",
             )
+
+#   todo = Todo(**raw_todo.dict())
+#   await session.execute(update(Todo).filter(Todo.id == raw_todo.id).values(**raw_todo.dict()))
+
+
         for key, value in raw_todo.dict().items():
             setattr(todo, key, value)
         await session.commit()
